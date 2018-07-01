@@ -17,7 +17,7 @@ public class RichMC
 {
   public static final String ModID = "richmc";
   public static final String ModName = "RichMC";
-  public static final String Version = "1.0.0";
+  public static final String Version = "1.0";
 
   DiscordEventHandlers handler;
   public static int tickCounter = 0;
@@ -28,6 +28,7 @@ public class RichMC
   public void preInit(FMLPreInitializationEvent ev)
   {
     log = ev.getModLog();
+    //dlDiscordLib.checkDiscordLib();
     handler = new DiscordEventHandlers.Builder().setReadyEventHandler((user) -> {
       System.out.println("Welcome " + user.username + "#" + user.discriminator + "! Thanks for using RichMC.");
     }).build();

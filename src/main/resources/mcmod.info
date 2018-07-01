@@ -1,15 +1,15 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "richmc",
+  "name": "RichMC",
+  "description": "A mod which adds Discord Rich Presence integration.",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
+  "url": "https://github.com/maak4422/RichMC",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
-  "logoFile": "",
+  "authorList": ["Circl3s"],
+  "credits": "@MineBartekSA for some help.",
+  "logoFile": "logo.png",
   "screenshots": [],
   "dependencies": []
 }
