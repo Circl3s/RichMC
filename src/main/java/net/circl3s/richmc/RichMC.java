@@ -20,6 +20,7 @@ public class RichMC
   public static final String Version = "1.0.0";
 
   DiscordEventHandlers handler;
+  public static int tickCounter = 0;
 
   public static Logger log;
 
@@ -54,13 +55,18 @@ public class RichMC
     }
 
     @SubscribeEvent
-    public static void WorldEnter(PlayerEvent.PlayerLoggedInEvent ev)
+    public static void LogIn(TickEvent.PlayerTickEvent ev)
     {
-      DiscordStates.inGame();
+      if(tickCounter < 20) {
+        tickCounter++;
+      } else {
+        DiscordStates.inGame();
+        tickCounter = 0;
+      }
     }
 
     @SubscribeEvent
-    public static void WorlodLeave(PlayerEvent.PlayerLoggedOutEvent ev)
+    public static void LogOut(PlayerEvent.PlayerLoggedOutEvent ev)
     {
       DiscordStates.inMenu();
     }
