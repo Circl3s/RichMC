@@ -2,54 +2,56 @@ package net.circl3s.richmc;
 
 import net.minecraft.client.Minecraft;
 import java.time.Instant;
-import net.arikia.dev.drpc.DiscordRichPresence;
-import net.arikia.dev.drpc.DiscordRPC;
+import com.github.psnrigner.discordrpcjava.DiscordRichPresence;
+import com.github.psnrigner.discordrpcjava.DiscordRpc;
 
 public class DiscordStates {
 
   public static long inGameStartTime;
 
   public static void inMenu() {
+    DiscordRpc discordrpc = new DiscordRpc();
     DiscordRichPresence drp = new DiscordRichPresence();
 
-    drp.details = "In Menu";
-    drp.state = "Just chillin'";
-    drp.largeImageKey = "logo_large";
-    drp.largeImageText = "Made possible by RichMC!";
-    DiscordRPC.discordUpdatePresence(drp);
+    drp.setDetails("In Menu");
+    drp.setState("Just chillin'");
+    drp.setLargeImageKey("logo_large");
+    drp.setLargeImageText("Made possible by RichMC!");
+    discordrpc.updatePresence(drp);
   }
 
   public static void inGame() {
     DiscordRichPresence drp = new DiscordRichPresence();
+    DiscordRpc discordrpc = new DiscordRpc();
 
     boolean isSingleplayer = Minecraft.getMinecraft().isSingleplayer();
     boolean isOffline = Minecraft.getMinecraft().isIntegratedServerRunning();
     String ign = Minecraft.getMinecraft().player.getDisplayNameString();
     String gamemode = Minecraft.getMinecraft().playerController.getCurrentGameType().getName();
 
-    drp.details = "IGN: " + ign;
-    drp.state = "Playing " + gamemode;
+    drp.setDetails("IGN: " + ign);
+    drp.setState("Playing " + gamemode);
     if(isOffline == true) {
       if(isSingleplayer == true) {
-        drp.largeImageKey = "sp";
-        drp.largeImageText = "Playing Singleplayer";
+        drp.setLargeImageKey("sp");
+        drp.setLargeImageText("Playing Singleplayer");
       } else {
-        drp.largeImageKey = "mp";
-        drp.largeImageText = "Hosting a LAN game";
+        drp.setLargeImageKey("mp");
+        drp.setLargeImageText("Hosting a LAN game");
       }
     } else {
-      drp.largeImageKey = "mp";
-      drp.largeImageText = "Playing Multiplayer";
+      drp.setLargeImageKey("mp");
+      drp.setLargeImageText("Playing Multiplayer");
     }
-    drp.smallImageKey = "logo_small";
-    drp.smallImageText = "Made possible by RichMC!";
+    drp.setSmallImageKey("logo_small");
+    drp.setSmallImageText("Made possible by RichMC!");
     if(inGameStartTime == 0)
     {
       Instant instant = Instant.now();
       inGameStartTime = instant.getEpochSecond();
     }
-    drp.startTimestamp = inGameStartTime;
-    DiscordRPC.discordUpdatePresence(drp);
+    drp.setStartTimestamp(inGameStartTime);
+    discordrpc.updatePresence(drp);
   }
 
 }
