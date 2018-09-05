@@ -24,6 +24,9 @@ public class RichMC
 
   public static Logger log;
 
+  DiscordEvents discordEvents = new DiscordEvents();
+  static DiscordRpc discordRpc = new DiscordRpc();
+
   @Mod.EventHandler
   public void preInit(FMLPreInitializationEvent ev)
   {
@@ -34,7 +37,7 @@ public class RichMC
   @Mod.EventHandler
   public void init(FMLInitializationEvent ev)
   {
-    DiscordRpc.init("459772197364301825", DiscordEvents.discordEventHandler, true);
+    discordRpc.init("459772197364301825", discordEvents.discordEventHandler, true);
   }
 
   @Mod.EventHandler
@@ -49,7 +52,7 @@ public class RichMC
     @SubscribeEvent
     public static void Tick(TickEvent.RenderTickEvent ev)
     {
-      DiscordRpc.runCallbacks();
+      discordRpc.runCallbacks();
     }
 
     @SubscribeEvent
@@ -75,7 +78,7 @@ public class RichMC
     {
       public void run(){
         System.out.println("RichMC shutting down... Bye-bye!");
-        DiscordRpc.shutdown();
+        discordRpc.shutdown();
       }
     });
   }
